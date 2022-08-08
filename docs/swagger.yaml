@@ -1,0 +1,8 @@
+basePath: /api/v1 基础路径
+info:
+  contact: {}
+  description: 描述:更方便的对接接口
+  title: 搭建gin脚手架
+  version: 1.0 版本
+paths: {}
+swagger: "2.0"

@@ -1,0 +1,9 @@
+database:
+  dbtype: mysql
+  dbname: database
+  table: table
+  username: username
+  password: password
+
+application:
+  port: 8000

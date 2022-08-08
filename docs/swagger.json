@@ -1,0 +1,11 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "描述:更方便的对接接口",
+        "title": "搭建gin脚手架",
+        "contact": {},
+        "version": "1.0 版本"
+    },
+    "basePath": "/api/v1 基础路径",
+    "paths": {}
+}

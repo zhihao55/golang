@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 /**
-	路由器
+	路由
  */
 type OrderRouter struct {
 }

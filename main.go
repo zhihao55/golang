@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"gin_cli/bean"
+	"gin_cli/common"
 	_ "gin_cli/docs"
+	"gin_cli/middleware"
 	"gin_cli/router"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"io/ioutil"
 	"os"
 )
 
@@ -21,15 +24,15 @@ func main() {
 	initConfig()
 	initDb()
 	r := gin.Default()
+	banner()
+	//使用全局中间件
+	r.Use(middleware.CorsMiddleware()) //全局路由
 	router.Load(r)
-	//r := gin.Default()
-	//r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run(":9000")
+	r.Run(viper.GetString("application.port"))
 }
 
 //初始化配置文件
 func initConfig() {
-	fmt.Println("初始化开始")
 	workDir, _ := os.Getwd() //获取当前路径
 	fmt.Println(workDir)
 	viper.SetConfigName("application")
@@ -52,4 +55,16 @@ func initDb() {
 	var user = bean.User{Id: 1}
 	db.Take(&user)
 	fmt.Printf("%#v\n", user)
+}
+
+func banner() {
+	if !(common.Isfile("./banner.txt")) {
+		fmt.Println("当前文件不存在")
+	} else {
+		content, err := ioutil.ReadFile("./banner.txt")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(content))
+	}
 }
